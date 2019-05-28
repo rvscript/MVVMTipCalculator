@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MvvmTipCalculator</string>
+    <string name="action_settings">Settings</string>
+    <string name="et_input_check_amount">check</string>
+    <string name="et_tip_percentage">Tip Percentage</string>
+    <string name="txt_for_bill_amount_label">Check</string>
+    <string name="txt_for_tip_amount_label">Tip</string>
+    <string name="txt_for_grand_total_label">Total</string>
+</resources>
