@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <!-- hover over root tag, click on the lightbulb and  select to data binding layout
@@ -26,18 +27,24 @@
                     app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         </android.support.design.widget.AppBarLayout>
+<!-- set the vm variable of the child layout to the vm variable of this parent layout
+     child layout = vm, parent layout = @{vm}
+ -->
+        <include
+                layout="@layout/content_main"
+                app:vm="@{vm}"
+        />
 
-        <include layout="@layout/content_main"/>
-<!-- use the data tag in the FloatingAction button
+        <!-- use the data tag in the FloatingAction button
 
-android:onClick="@{() -> vm.calculateTip()}"
--the value of my onclick attribute is called a databinding expression
--data binding expressions like "@{ something }" "the mustache operator"
--@{ lambda expression () -> vm.calculateTip()}
-- the onClick attribute needs a view.OnClickListener to process the click
-- the calculateTip function has nothing to do with android or its views
-- the lambda expression created invokes in action directly
--->
+        android:onClick="@{() -> vm.calculateTip()}"
+        -the value of my onclick attribute is called a databinding expression
+        -data binding expressions like "@{ something }" "the mustache operator"
+        -@{ lambda expression () -> vm.calculateTip()}
+        - the onClick attribute needs a view.OnClickListener to process the click
+        - the calculateTip function has nothing to do with android or its views
+        - the lambda expression created invokes in action directly
+        -->
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/calculate_fab"
                 android:layout_width="wrap_content"
@@ -45,7 +52,7 @@ android:onClick="@{() -> vm.calculateTip()}"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
                 android:onClick="@{() -> vm.calculateTip()}"
-                app:srcCompat="@android:drawable/ic_menu_compass"/>
+                app:srcCompat="@drawable/ic_attach_money_white_24dp"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

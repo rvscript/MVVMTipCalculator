@@ -1,5 +1,7 @@
 package com.example.mvvmtipcalculator.viewmodel
 
+import android.app.Application
+import com.example.mvvmtipcalculator.R
 import com.example.mvvmtipcalculator.model.Calculator
 import com.example.mvvmtipcalculator.model.TipCalculation
 import org.junit.Assert.assertEquals
@@ -16,12 +18,20 @@ class CalculatorViewModelTest {
     @Mock
     lateinit var mockCalculator: Calculator
 
+    @Mock
+    lateinit var application: Application
+
     //  do this to create an instance of the class you wish to test
     @Before
     fun setup() {
-//    MockitoAnnotations setup
+//    MockitoAnnotations setup will initialize all the mocks
         MockitoAnnotations.initMocks(this)
-        calculatorViewModel = CalculatorViewModel(mockCalculator)
+        stubResource(0.0, "$0.00")
+        calculatorViewModel = CalculatorViewModel(application, mockCalculator)
+    }
+
+    private fun stubResource(given: Double, returnStub: String) {
+        `when`(application.getString(R.string.dollar_amount, given)).thenReturn(returnStub)
     }
 
     //    Create your test cases: this is for every test
@@ -38,10 +48,15 @@ goto > projects> app> test> create this> (mockito-extensions directory) create t
 //    Mockito stub and and mock
         val stub = TipCalculation(checkAmount = 10.00, tipAmount = 1.5, grandTotal = 11.5)
         `when`(mockCalculator.calculateTip(10.00, 15)).thenReturn(stub)
+        stubResource(10.0, "$10.00")
+        stubResource(1.5, "$1.50")
+        stubResource(11.5, "$11.50")
 
         calculatorViewModel.calculateTip()
 
-        assertEquals(stub, calculatorViewModel.tipCalculation)
+        assertEquals("$10.00", calculatorViewModel.outputCheckAmount)
+        assertEquals("$1.50", calculatorViewModel.outputTipAmount)
+        assertEquals("$11.50", calculatorViewModel.outputTotalDollarAmount)
     }
 
     // validate call to calculate bad tip percentage

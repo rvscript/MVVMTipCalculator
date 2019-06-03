@@ -1,5 +1,6 @@
 package com.example.mvvmtipcalculator
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -28,7 +29,7 @@ ActivityTipCalculatorBinding was created the moment we wrapped the layout in a l
 //      create a databinding version of setContentView which binds and inflates the layout and returns it all in one shot
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 //        now the view model is wired up to the view
-        binding.vm = CalculatorViewModel()
+        binding.vm = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
 
         setSupportActionBar(binding.toolbar)
 

@@ -6,4 +6,6 @@
     <string name="txt_for_bill_amount_label">Check</string>
     <string name="txt_for_tip_amount_label">Tip</string>
     <string name="txt_for_grand_total_label">Total</string>
+
+    <string name="dollar_amount">$%1$.02f</string>
 </resources>
